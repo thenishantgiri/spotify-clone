@@ -25,9 +25,11 @@ model Song {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   name      String
-  Artist    Artist     @relation(fields: [artistId], references: [id])
+  artist    Artist     @relation(fields: [artistId], references: [id])
   artistId  Int
   playlists Playlist[]
+  duration  Int
+  url       String
 }
 
 model Artist {
@@ -44,6 +46,6 @@ model Playlist {
   updatedAt DateTime @updatedAt
   name      String
   songs     Song[]
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
