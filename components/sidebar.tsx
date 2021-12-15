@@ -64,7 +64,7 @@ const Sidebar = () => {
     >
       <Box paddingY="20px" height="100%">
         <Box width="120px" marginBottom="20px" paddingX="20px">
-          <NextImage src="/logo.svg" height={60} width={120} />
+          <NextImage src="/spotify.svg" height={60} width={120} />
         </Box>
         <Box marginBottom="20px">
           <List spacing={2}>
@@ -86,7 +86,7 @@ const Sidebar = () => {
             ))}
           </List>
         </Box>
-        <Box marginTop="20px">
+        <Box marginTop="20px" marginBottom="20px">
           <List spacing={2}>
             {musicMenu.map((menu) => (
               <ListItem paddingX="20px" fontSize="16px" key={menu.name}>
