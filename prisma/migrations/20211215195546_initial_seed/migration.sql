@@ -95,4 +95,3 @@ ALTER TABLE "_PlaylistToSong"
     ADD FOREIGN KEY ("B") REFERENCES "Song" ("id") ON DELETE CASCADE ON
             UPDATE
                 CASCADE;
-
