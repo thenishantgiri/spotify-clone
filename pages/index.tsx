@@ -1,19 +1,20 @@
 import { Box, Flex, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
 import GradientLayout from "../components/gradientLayout";
-import prisma from "../lib/prisma";
 import { useMe } from "../lib/hooks";
+import prisma from "../lib/prisma";
 
 const Home = ({ artists }) => {
   const { user } = useMe();
+
   return (
     <GradientLayout
+      roundImage
       color="green"
       subtitle="profile"
       title={`${user?.firstName} ${user?.lastName}`}
-      description={`${user?.playlistsCount} public playlist`}
+      description={`${user?.playlistsCount} public playlists`}
       image="https://avatars.githubusercontent.com/u/56505350?v=4"
-      roundImage
     >
       <Box color="white" paddingX="40px">
         <Box marginBottom="40px">
@@ -42,6 +43,7 @@ const Home = ({ artists }) => {
 
 export const getServerSideProps = async () => {
   const artists = await prisma.artist.findMany({});
+
   return {
     props: { artists },
   };

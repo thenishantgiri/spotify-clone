@@ -1,7 +1,7 @@
 import GradientLayout from "../../components/gradientLayout";
+import SongTable from "../../components/songsTable";
 import { validateToken } from "../../lib/auth";
 import prisma from "../../lib/prisma";
-import SongTable from "../../components/songsTable";
 
 const getBGColor = (id) => {
   const colors = [
