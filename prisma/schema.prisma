@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+// User model
+model User {
+  id        Int        @id @default(autoincrement()) // Unique identifier for each user
+  createdAt DateTime   @default(now()) // Timestamp of user creation
+  updatedAt DateTime   @updatedAt // Timestamp of user update
+  firstName String // First name of the user
+  lastName  String // Last name of the user
+  email     String     @unique // Email address of the user (unique)
+  password  String // Password of the user
+  playlists Playlist[] // Playlists created by the user
+}
+
+// Song model
+model Song {
+  id        Int        @id @default(autoincrement()) // Unique identifier for each song
+  createdAt DateTime   @default(now()) // Timestamp of song creation
+  updatedAt DateTime   @updatedAt // Timestamp of song update
+  name      String // Name of the song
+  artist    Artist     @relation(fields: [artistId], references: [id]) // Artist who created the song
+  artistId  Int // ID of the artist who created the song
+  playlists Playlist[] // Playlists containing this song
+  duration  Int // Duration of the song in seconds
+  url       String // URL to access the song file
+}
+
+// Artist model
+model Artist {
+  id        Int      @id @default(autoincrement()) // Unique identifier for each artist
+  createdAt DateTime @default(now()) // Timestamp of artist creation
+  updatedAt DateTime @updatedAt // Timestamp of artist update
+  songs     Song[] // Songs created by this artist
+  name      String   @unique // Name of the artist (unique)
+  image     String // URL to access the artist image file
+}
+
+// Playlist model
+model Playlist {
+  id        Int      @id @default(autoincrement()) // Unique identifier for each playlist
+  createdAt DateTime @default(now()) // Timestamp of playlist creation
+  updatedAt DateTime @updatedAt // Timestamp of playlist update
+  name      String // Name of the playlist
+  songs     Song[] // Songs in this playlist
+  user      User     @relation(fields: [userId], references: [id]) // User who created this playlist
+  userId    Int // ID of the user who created this playlist
+}
