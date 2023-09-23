@@ -10,7 +10,7 @@ export default function fetcher(url: string, data?: any) {
     body: data ? JSON.stringify(data) : null, // Serialize 'data' as JSON and include it in the request body if provided
   }).then((res) => {
     // Check the HTTP status code of the response
-    if (res.status > 399 && res.status < 200) {
+    if (res.status > 399 || res.status < 200) {
       // If the status code indicates an error, throw an error
       throw new Error();
     }
