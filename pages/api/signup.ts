@@ -55,6 +55,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     })
   );
 
-  // Send a JSON response containing the created user data
-  res.json(user);
+  // Create a payload containing user information and send it as JSON response
+  const payload = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+  };
+  res.json(payload);
 };
