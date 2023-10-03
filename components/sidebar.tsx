@@ -9,29 +9,23 @@ import {
   LinkBox,
   LinkOverlay,
 } from "@chakra-ui/layout";
-import {
-  MdHome,
-  MdSearch,
-  MdLibraryMusic,
-  MdPlaylistAdd,
-  MdFavorite,
-} from "react-icons/md";
+import { FaHeart, FaPlus } from "react-icons/fa6";
 import { usePlaylist } from "../lib/hooks";
 
 const navMenu = [
   {
     name: "Home",
-    icon: MdHome,
+    icon: "/home.svg",
     route: "/",
   },
   {
     name: "Search",
-    icon: MdSearch,
+    icon: "/search.svg",
     route: "/search",
   },
   {
     name: "Your Library",
-    icon: MdLibraryMusic,
+    icon: "/library.svg",
     route: "/library",
   },
 ];
@@ -39,13 +33,17 @@ const navMenu = [
 const musicMenu = [
   {
     name: "Create Playlist",
-    icon: MdPlaylistAdd,
+    icon: FaPlus,
     route: "/",
+    color: "black",
+    background: "#a7a7a7",
   },
   {
     name: "Favorites",
-    icon: MdFavorite,
+    icon: FaHeart,
     route: "/favorites",
+    color: "#a7a7a7",
+    background: "linear-gradient(135deg, #3F13B9, #7C9287)",
   },
 ];
 
@@ -73,11 +71,12 @@ const Sidebar = () => {
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
                     <LinkOverlay>
-                      <ListIcon
-                        as={menu.icon}
-                        color="white"
+                      <Box
                         marginRight="20px"
-                      />
+                        sx={{ display: "inline", verticalAlign: "top" }}
+                      >
+                        <NextImage src={menu.icon} height={24} width={24} />
+                      </Box>
                       {menu.name}
                     </LinkOverlay>
                   </NextLink>
@@ -94,12 +93,23 @@ const Sidebar = () => {
                 <LinkBox>
                   <NextLink href={menu.route} passHref>
                     <LinkOverlay>
-                      <ListIcon
-                        as={menu.icon}
-                        color="white"
-                        marginRight="20px"
-                      />
-                      {menu.name}
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Box
+                          height="35px"
+                          width="35px"
+                          color={menu.color}
+                          marginRight="20px"
+                          background={menu.background}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            borderRadius: "2px",
+                          }}
+                        >
+                          <ListIcon as={menu.icon} sx={{ margin: "auto" }} />
+                        </Box>
+                        {menu.name}
+                      </Box>
                     </LinkOverlay>
                   </NextLink>
                 </LinkBox>
