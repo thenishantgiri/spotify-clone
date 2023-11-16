@@ -59,6 +59,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Artist_name_key" ON "Artist"("name");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Artist_image_key" ON "Artist"("image");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "_PlaylistToSong_AB_unique" ON "_PlaylistToSong"("A", "B");
 
 -- CreateIndex
