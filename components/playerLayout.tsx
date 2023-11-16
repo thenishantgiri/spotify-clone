@@ -9,7 +9,7 @@ const PlayerLayout = ({ children }) => {
         <Sidebar />
       </Box>
       {/* Children */}
-      <Box marginLeft="250px" marginBottom="100px">
+      <Box marginLeft="250px" marginBottom="100px" height="calc(100vh - 100px)">
         {children}
       </Box>
       {/* PlayerBar */}
