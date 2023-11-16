@@ -43,7 +43,7 @@ model Artist {
   updatedAt DateTime @updatedAt // Timestamp of artist update
   songs     Song[] // Songs created by this artist
   name      String   @unique // Name of the artist (unique)
-  image     String // URL to access the artist image file
+  image     String   @unique // URL to access the artist image file
 }
 
 // Playlist model

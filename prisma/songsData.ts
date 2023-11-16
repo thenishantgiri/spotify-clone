@@ -1,20 +1,22 @@
 export const artistsData: {
   name: string;
+  image: string;
   songs: any[];
 }[] = [
   {
     name: "Glitch",
+    image: "https://i1.sndcdn.com/avatars-000096471483-zkmqcf-t500x500.jpg",
     songs: [
       {
         name: "Fermi Paradox",
         duration: 235,
-
         url: "https://dl.dropboxusercontent.com/s/7xmpwvvek6szx5n/fermi-paradox.mp3?dl=0",
       },
     ],
   },
   {
-    name: "Purple Cat",
+    name: "Purrple Cat",
+    image: "https://i1.sndcdn.com/avatars-hXCegvaYMoJX7AUW-1EjExg-t500x500.jpg",
     songs: [
       {
         name: "Long Day",
@@ -25,6 +27,8 @@ export const artistsData: {
   },
   {
     name: "Ben Sound",
+    image:
+      "https://yt3.googleusercontent.com/aKtKxRPC0IMoNhgTk8DjxV0rqS6WzoIiJwmlAJ79-0MIoabNK2dS0_w86cSrH6jMIydTw_6ppA=s176-c-k-c0x00ffffff-no-rj",
     songs: [
       {
         name: "The Elevator Bossa Nova",
@@ -35,6 +39,7 @@ export const artistsData: {
   },
   {
     name: "LiQWYD",
+    image: "https://i1.sndcdn.com/avatars-GGWLITcX3rkTeohx-P7kzlQ-t500x500.jpg",
     songs: [
       {
         name: "Winter",
@@ -45,6 +50,7 @@ export const artistsData: {
   },
   {
     name: "FSM Team",
+    image: "https://i1.sndcdn.com/avatars-BevBqiNPy3YnGyx8-oVxlwQ-t500x500.jpg",
     songs: [
       {
         name: "Eternal Springtime",

@@ -16,7 +16,7 @@ const run = async () => {
         create: {
           // Create artist if not exists
           name: artist.name,
-          image: "",
+          image: artist.image,
           songs: {
             create: artist.songs.map((song) => ({
               // Creating songs for the artist
