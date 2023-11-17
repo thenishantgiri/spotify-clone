@@ -42,18 +42,13 @@ export const validateRoute = (handler) => {
 
 // Function to validate and decode a token
 export const validateToken = (token) => {
-  try {
-    // Verify the token and return user information
-    const user = jwt.verify(token, "hello_secret");
-    // return user;
-    const payload = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-    };
-    return payload;
-  } catch (error) {
-    // Handle token verification errors
-    return null;
-  }
+  // Verify the token and return user information
+  const user = jwt.verify(token, "hello_secret");
+  // return user;
+  const payload = {
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+  };
+  return payload;
 };
