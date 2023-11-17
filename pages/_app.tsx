@@ -3,7 +3,7 @@ import { StoreProvider } from "easy-peasy";
 import "reset-css";
 import theme from "../styles/theme.js";
 import PlayerLayout from "../components/playerLayout";
-import { store } from "../lib/store.js";
+import { store } from "../lib/store";
 
 const MyApp = ({ Component, pageProps }) => {
   return (
