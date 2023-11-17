@@ -84,6 +84,38 @@ const Player = () => {
           />
         </ButtonGroup>
       </Center>
+
+      {/* Seek Bar */}
+      <Box color="gray.600">
+        <Flex justify="center" align="center">
+          {/* Time Elapsed */}
+          <Box width="5%" marginTop="10px">
+            <Text fontSize="xs">1:21</Text>
+          </Box>
+
+          {/* Seek Bar: Slider */}
+          <Box width="90%">
+            <RangeSlider
+              // eslint-disable-next-line jsx-a11y/aria-proptypes
+              aria-label={["min", "max"]}
+              step={0.1}
+              min={0}
+              max={321}
+              id="player-range"
+            >
+              <RangeSliderTrack bg="gray.800">
+                <RangeSliderFilledTrack bg="gray.600" />
+              </RangeSliderTrack>
+              <RangeSliderThumb index={0} />
+            </RangeSlider>
+          </Box>
+
+          {/* Total Duration */}
+          <Box width="5%" textAlign="right" marginTop="10px">
+            <Text fontSize="xs">4:30</Text>
+          </Box>
+        </Flex>
+      </Box>
     </Box>
   );
 };
