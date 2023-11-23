@@ -21,11 +21,13 @@ import {
   PiRepeatFill,
 } from "react-icons/pi";
 import { useStoreActions } from "easy-peasy";
+import { formatTime } from "../lib/formatters";
 
 const Player = ({ songs, activeSong }) => {
   const [playing, setPlaying] = useState(true);
   const [index, setIndex] = useState(0);
   const [seek, setSeek] = useState(0.0);
+  const [isSeeking, setIsSeeking] = useState(false);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
   const [duration, setDuration] = useState(0.0);
@@ -63,10 +65,35 @@ const Player = ({ songs, activeSong }) => {
     });
   };
 
+  const onEnd = () => {
+    if (repeat) {
+      setSeek(0); // for seek ui
+      soundRef.current.seek(0); // for seeking actual song
+    } else {
+      nextSong();
+    }
+  };
+
+  const onLoad = () => {
+    const songDuration = soundRef.current.duration();
+    setDuration(songDuration);
+  };
+
+  const onSeek = (e) => {
+    setSeek(parseFloat(e[0]));
+    soundRef.current.seek(e[0]);
+  };
+
   return (
     <Box>
       <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} ref={soundRef} />
+        <ReactHowler
+          playing={playing}
+          src={activeSong?.url}
+          ref={soundRef}
+          onLoad={onLoad}
+          onEnd={onEnd}
+        />
       </Box>
       <Center color="gray.600">
         <ButtonGroup>
@@ -88,6 +115,7 @@ const Player = ({ songs, activeSong }) => {
             fontSize="24px"
             color="white"
             icon={<PiSkipBackFill />}
+            onClick={prevSong}
           />
 
           {playing ? (
@@ -122,6 +150,7 @@ const Player = ({ songs, activeSong }) => {
             fontSize="24px"
             color="white"
             icon={<PiSkipForwardFill />}
+            onCanPlay={nextSong}
           />
           {/* Repeat */}
           <IconButton
@@ -140,7 +169,7 @@ const Player = ({ songs, activeSong }) => {
       <Box color="gray.600">
         <Flex justify="center" align="center">
           {/* Time Elapsed */}
-          <Box width="5%" marginTop="10px">
+          <Box width="5%">
             <Text fontSize="xs">1:21</Text>
           </Box>
 
@@ -151,8 +180,12 @@ const Player = ({ songs, activeSong }) => {
               aria-label={["min", "max"]}
               step={0.1}
               min={0}
-              max={321}
+              max={duration ? (duration.toFixed(2) as unknown as number) : 0}
               id="player-range"
+              onChange={onSeek}
+              value={[seek]}
+              onChangeStart={() => setIsSeeking(true)}
+              onChangeEnd={() => setIsSeeking(false)}
             >
               <RangeSliderTrack bg="gray.800">
                 <RangeSliderFilledTrack bg="gray.600" />
@@ -162,8 +195,8 @@ const Player = ({ songs, activeSong }) => {
           </Box>
 
           {/* Total Duration */}
-          <Box width="5%" textAlign="right" marginTop="10px">
-            <Text fontSize="xs">4:30</Text>
+          <Box width="5%" textAlign="right">
+            <Text fontSize="xs">{formatTime(duration)}</Text>
           </Box>
         </Flex>
       </Box>
