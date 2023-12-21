@@ -33,6 +33,22 @@ const Player = ({ songs, activeSong }) => {
   const [duration, setDuration] = useState(0.0);
   const soundRef = useRef(null);
 
+  useEffect(() => {
+    let timerId;
+
+    if (playing && !isSeeking) {
+      const f = () => {
+        setSeek(soundRef.current.seek());
+        timerId = requestAnimationFrame(f);
+      };
+
+      timerId = requestAnimationFrame(f);
+      return () => cancelAnimationFrame(f);
+    }
+
+    cancelAnimationFrame(timerId);
+  }, [playing, isSeeking]);
+
   const setPlayState = (value) => {
     setPlaying(value);
   };
@@ -150,7 +166,7 @@ const Player = ({ songs, activeSong }) => {
             fontSize="24px"
             color="white"
             icon={<PiSkipForwardFill />}
-            onCanPlay={nextSong}
+            onClick={nextSong}
           />
           {/* Repeat */}
           <IconButton
@@ -170,7 +186,7 @@ const Player = ({ songs, activeSong }) => {
         <Flex justify="center" align="center">
           {/* Time Elapsed */}
           <Box width="5%">
-            <Text fontSize="xs">1:21</Text>
+            <Text fontSize="xs">{formatTime(seek)}</Text>
           </Box>
 
           {/* Seek Bar: Slider */}
